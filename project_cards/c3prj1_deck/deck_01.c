@@ -3,21 +3,15 @@
 #include "deck_01.h"
 
 int deck_contains(deck_t * d, card_t c) {
-  char val = c.value;
-  char suit = c.suit;
-  const char card[3] = {val, suit, '\0'};  // contains value and suit of a card
+  card_t *pc = &c; // a pointer to card temp
 
-  printf("%s\n", card);
-  /* // comparison by moving from char to char via pointers */
-  /* char *pcard = card; */
+  card_t currCard = *d->cards[0];
 
-  /* for (size_t index = 0; index < n_cards; index++) { */
-  /*   char ***card_from_deck = &d.cards; */
-  /*   char *p = *card_from_deck;	// value and suit of the comparison */
-
-  /*   while (*p != '\0') { */
-  /*     if (*pcard == *p) { */
-	
+  if (pc->value == currCard.value && pc->suit == currCard.suit) {
+    printf("match\n");
+  }
+  
+  
   return 0;
 }
 
@@ -29,11 +23,18 @@ int main () {
   temp.suit = 'c';
 
   deck_t deck;
-  char *arr[] = {"0s", "Kh", "9c"}; // type should be card_t (member access?)
-  deck.cards = arr;
-  deck.n_cards = 3;
+  deck.n_cards = 51;
+  unsigned size = deck.n_cards;
   
-  deck_contains(deck.cards, temp);
+  // initialize an  array of cards
+  card_t *arr_cards[1];
+  arr_cards[0] = &temp;		/* pointer to the first element is the address */
+  printf("card: %c%c\n", arr_cards[0]->value,
+	 arr_cards[0]->suit); 
+
+  deck.cards = arr_cards; 
+  
+  deck_contains(&deck, temp);	/* need to understand this why reference */
   
   return 0;
 }

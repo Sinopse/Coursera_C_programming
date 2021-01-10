@@ -30,7 +30,7 @@ int deck_contains(deck_t * d, card_t c) {
       // return 0;
     }
   }
-  return EXIT_SUCCESS;
+  return EXIT_SUCCESS; // return 0
 }
 
 void shuffle(deck_t * d){
